@@ -172,7 +172,6 @@ func (r *PostRepo) AddComment(ctx context.Context, postID string, userID string,
 		return nil, err
 	}
 
-	// Fetch the updated post document
 	updatedPost := &types.Post{}
 	err = r.db.FindOne(ctx, bson.M{"_id": postObjID}).Decode(updatedPost)
 	if err != nil {
