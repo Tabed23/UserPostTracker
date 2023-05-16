@@ -59,9 +59,9 @@ func (c *PostController) LikePost(ctx *gin.Context) {
 	like := types.Like{}
 
 	if err := ctx.ShouldBindJSON(&like); err != nil {
-        ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid  ID"})
-        return
-    }
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid  ID"})
+		return
+	}
 
 	err := c.postService.AddLike(ctx, like.PostID.Hex(), like.UserID.Hex())
 	if err != nil {
@@ -77,9 +77,9 @@ func (c *PostController) UnlikePost(ctx *gin.Context) {
 	like := types.Like{}
 
 	if err := ctx.ShouldBindJSON(&like); err != nil {
-        ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid  ID"})
-        return
-    }
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid  ID"})
+		return
+	}
 
 	err := c.postService.RemoveLike(ctx, like.PostID.Hex(), like.UserID.Hex())
 	if err != nil {
@@ -92,7 +92,6 @@ func (c *PostController) UnlikePost(ctx *gin.Context) {
 
 func (c *PostController) AddComment(ctx *gin.Context) {
 	postID := ctx.Param("id")
-
 
 	cmt := types.Comment{}
 
@@ -110,7 +109,7 @@ func (c *PostController) AddComment(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, gin.H{"comment": res})
 }
 
-func(c *PostController)UpdatePost(ctx *gin.Context){
+func (c *PostController) UpdatePost(ctx *gin.Context) {
 	post := types.Post{}
 	if err := ctx.ShouldBindJSON(&post); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid post body"})
@@ -118,9 +117,9 @@ func(c *PostController)UpdatePost(ctx *gin.Context){
 	res, err := c.postService.UpdatePost(ctx, &post)
 
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error":"could not update post"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "could not update post"})
 		return
 	}
 
-	ctx.JSON(http.StatusOK, gin.H{"message":res})
+	ctx.JSON(http.StatusOK, gin.H{"message": res})
 }

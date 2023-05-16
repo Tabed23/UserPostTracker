@@ -43,7 +43,7 @@ func (p *PostService) GetPostCount(ctx context.Context) (int64, error) {
 	return p.postRepo.GetPostCount(ctx)
 }
 
-func (p *PostService) AddComment(ctx context.Context, postID string, userID string, comment *types.Comment) (*types.Post, error)  {
+func (p *PostService) AddComment(ctx context.Context, postID string, userID string, comment *types.Comment) (*types.Post, error) {
 	return p.postRepo.AddComment(ctx, postID, userID, comment)
 }
 
@@ -55,9 +55,10 @@ func (p *PostService) RemoveLike(ctx context.Context, postID, userID string) err
 	return p.postRepo.UnlikePost(ctx, postID, userID)
 }
 
-func (p *PostService)UpdatePost(ctx context.Context, post *types.Post)(string, error) {
+func (p *PostService) UpdatePost(ctx context.Context, post *types.Post) (string, error) {
 	return p.postRepo.UpdatePost(ctx, post)
 }
+
 type UserInterface interface {
 	CreateUser(user *types.User) error
 }

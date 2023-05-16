@@ -17,17 +17,17 @@ type Post struct {
 	Title     string               `json:"title" bson:"title"`
 	Body      string               `json:"body" bson:"body"`
 	Media     string               `json:"media" bson:"media"`
-    Likes 	    []primitive.ObjectID`json:"likes,omitempty" bson:"likes,omitempty"`
+	Likes     []primitive.ObjectID `json:"likes,omitempty" bson:"likes,omitempty"`
 	Comments  []Comment            `json:"comments" bson:"comments"`
 	CreatedAt primitive.DateTime   `json:"createdAt" bson:"createdAt"`
 	UpdatedAt primitive.DateTime   `json:"updatedAt" bson:"updatedAt"`
 }
 
 type Comment struct {
-	UserID    primitive.ObjectID   `json:"userId" bson:"userId"`
-	Comment   string               `json:"comment" bson:"comment"`
-	CreatedAt primitive.DateTime   `json:"createdAt" bson:"createdAt"`
-	UpdatedAt primitive.DateTime   `json:"updatedAt" bson:"updatedAt"`
+	UserID    primitive.ObjectID `json:"userId" bson:"userId"`
+	Comment   string             `json:"comment" bson:"comment"`
+	CreatedAt primitive.DateTime `json:"createdAt" bson:"createdAt"`
+	UpdatedAt primitive.DateTime `json:"updatedAt" bson:"updatedAt"`
 }
 
 type Like struct {

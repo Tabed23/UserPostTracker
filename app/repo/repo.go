@@ -94,7 +94,7 @@ func (r *PostRepo) GetPosts(ctx context.Context, skip, limit int64) ([]*types.Po
 	return posts, nil
 }
 
-func (r *PostRepo) UpdatePost(ctx context.Context, post *types.Post) (string,error) {
+func (r *PostRepo) UpdatePost(ctx context.Context, post *types.Post) (string, error) {
 	filter := bson.M{"_id": post.ID}
 	update := bson.M{"$set": bson.M{
 		"title":     post.Title,
@@ -107,7 +107,7 @@ func (r *PostRepo) UpdatePost(ctx context.Context, post *types.Post) (string,err
 		return "", err
 	}
 
-	return "post updated",nil
+	return "post updated", nil
 }
 func (r *PostRepo) LikePost(ctx context.Context, postID string, userID string) error {
 
@@ -156,22 +156,21 @@ func (r *PostRepo) UnlikePost(ctx context.Context, postID string, userID string)
 	return nil
 
 }
-func (r *PostRepo) AddComment(ctx context.Context, postID string, userID string, comment *types.Comment) (*types.Post, error)  {
+func (r *PostRepo) AddComment(ctx context.Context, postID string, userID string, comment *types.Comment) (*types.Post, error) {
 	postObjID, err := primitive.ObjectIDFromHex(postID)
-    if err != nil {
-        return nil, err
-    }
+	if err != nil {
+		return nil, err
+	}
 
-    filter := bson.M{"_id": postObjID}
-    update := bson.M{
-        "$push": bson.M{"comments": comment},
-        "$inc":  bson.M{"commentCount": 1},
-    }
-    _, err = r.db.UpdateOne(ctx, filter, update)
-    if err != nil {
-        return nil, err
-    }
-
+	filter := bson.M{"_id": postObjID}
+	update := bson.M{
+		"$push": bson.M{"comments": comment},
+		"$inc":  bson.M{"commentCount": 1},
+	}
+	_, err = r.db.UpdateOne(ctx, filter, update)
+	if err != nil {
+		return nil, err
+	}
 
 	// Fetch the updated post document
 	updatedPost := &types.Post{}
