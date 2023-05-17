@@ -16,7 +16,7 @@ Golang and Gin framework, using MongoDB as the database. It allows users to crea
 
 2. .env
     ```bash
-    MONGODB_URL="mongodb://8080:27017"
+    MONGODB_URL="mongodb://mongo:27017"
     ```
 
 3. Run the API
